@@ -1,63 +1,163 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
 @import "tailwindcss";
 
-/* Wire Tailwind's font utilities to the project fonts:
-   font-sans / default body -> Inter, font-serif (headings) -> Playfair Display */
 @theme {
-  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", serif;
+  --font-headline: "Playfair Display", Georgia, Cambria, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-primary: #580c1e;
+  --color-primary-container: #781029;
+  --color-surface-tint: #991b3b;
+  --color-secondary: #c89e37;
+  --color-secondary-container: #d4af37;
+  --color-secondary-fixed: #f7eed2;
+  --color-secondary-fixed-dim: #e5c05d;
+  --color-on-secondary-container: #463300;
+
+  --color-surface: #faf8f5;
+  --color-surface-dim: #dbdad7;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f5f3f0;
+  --color-surface-container: #efeeeb;
+  --color-surface-container-high: #eae8e5;
+  --color-surface-container-highest: #e4e2df;
+  --color-surface-variant: #e4e2df;
+  
+  --color-on-surface: #1a1918;
+  --color-on-surface-variant: #4e4443;
+  --color-tertiary: #2a2827;
+  --color-outline: #8c716e;
+  --color-outline-variant: #e5cfcd;
+
+  /* INASL 2027 landing page – taken from the INASL 2027 Jaipur logo */
+  --font-display: "Rozha One", Georgia, "Times New Roman", serif;
+  --font-text: "Hind", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-wine: #7a1426;
+  --color-wine-deep: #4b0b18;
+  --color-saffron: #e8731a;
+  --color-saffron-dark: #c95c0c;
+  --color-saffron-soft: #fde6d2;
+  --color-sand: #f9ede4;
+  --color-sand-deep: #f1d9c7;
+  --color-ink: #2b1417;
+  --color-stone: #6b5753;
+  --color-line: #ead9cf;
 }
 
-:root {
-  --font-head: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-
-  --cream: #FBF5E9;
-  --sand: #F4ECD9;
-
-  color: #33242A;
-  background-color: var(--cream);
-  font-family: var(--font-body);
+@layer utilities {
+  .font-headline {
+    font-family: var(--font-headline);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+  }
+  .ambient-shadow {
+    box-shadow: 0px 10px 30px rgba(15, 23, 42, 0.05);
+  }
+  .ambient-shadow-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ambient-shadow-hover:hover {
+    box-shadow: 0px 20px 40px -4px rgba(88, 12, 30, 0.12);
+    transform: translateY(-3px);
+  }
+  .gold-shimmer {
+    background: linear-gradient(135deg, #d4af37 0%, #f6e27a 50%, #c59b27 100%);
+  }
+  .gold-border {
+    border-color: rgba(212, 175, 55, 0.4);
+  }
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background-color: #FBF5E9;
-  color: #33242A;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
-
-#root {
-  min-height: 100vh;
-}
-
-img {
+/* intl-tel-input – match the site's form fields */
+.phone-input .iti {
   display: block;
-  max-width: 100%;
+  width: 100%;
+  --iti-border-color: rgba(0, 0, 0, 0.08);
+  --iti-dialcode-color: #1a1918;
+  --iti-hover-color: #faf8f5;
+  --iti-dropdown-bg: #fff;
 }
- 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.phone-input .iti__country-container {
+  padding: 1px;
 }
- 
+.phone-input .iti__selected-country {
+  border-radius: 0.75rem 0 0 0.75rem;
+}
+.phone-input .iti__selected-country-primary {
+  padding: 0 6px 0 14px;
+}
+.phone-input .iti__selected-dial-code {
+  font-size: 0.875rem;
+}
+.iti__dropdown-content {
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 32px rgba(88, 12, 30, 0.12);
+  z-index: 60;
+}
+.iti__search-input {
+  font-size: 0.875rem;
+}
+.iti__country {
+  font-size: 0.8125rem;
+}
 
-section[id] {
-  scroll-margin-top: 96px;
+/* ------------------------------------------------------------------------------------------------
+ * INASL 2027 landing page
+ * ---------------------------------------------------------------------------------------------- */
+
+/* The pointed Rajput arch from the "A" of the INASL 2027 logo, used to frame photographs. */
+.arch {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0 100V40C0 22 20 12 36 7C43 5 47.5 3 50 0C52.5 3 57 5 64 7C80 12 100 22 100 40V100Z'/></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0 100V40C0 22 20 12 36 7C43 5 47.5 3 50 0C52.5 3 57 5 64 7C80 12 100 22 100 40V100Z'/></svg>") center / 100% 100% no-repeat;
+}
+/* Lower, wider arch for small portraits and landscape photographs. */
+.arch-low {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0 100V24C0 13 20 7 36 4C43 3 47.5 1.8 50 0C52.5 1.8 57 3 64 4C80 7 100 13 100 24V100Z'/></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0 100V24C0 13 20 7 36 4C43 3 47.5 1.8 50 0C52.5 1.8 57 3 64 4C80 7 100 13 100 24V100Z'/></svg>") center / 100% 100% no-repeat;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+.landing {
+  font-family: var(--font-text);
+  color: var(--color-ink);
+}
+.landing :focus-visible {
+  outline: 2px solid var(--color-saffron);
+  outline-offset: 3px;
+}
+.landing .tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The one orchestrated moment: the hero arch opens and its text settles in on page load. */
+@keyframes inasl-arch-rise {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes inasl-fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-arch { animation: inasl-arch-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.hero-line { animation: inasl-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-arch, .hero-line { animation: none; }
+}
+
+/* Short settle when a value is swapped by the visitor (e.g. pricing period). */
+.swap-in { animation: inasl-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .swap-in { animation: none; }
 }
